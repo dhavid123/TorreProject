@@ -1,0 +1,138 @@
+<h1 class="animated fadeIn">Hello {{infoPerson.person.name}}!!!</h1>
+<hr />
+
+<div class="card text-white bg-dark mb-3">
+    <div class="card-header">Information</div>
+    <div class="card-body">
+        <h5 class="card-title">{{ infoPerson.person.professionalHeadline }}</h5>
+        <h6 class="card-title">{{ infoPerson.person.links[0].address }}</h6>
+        <h6 class="card-title"> <small>{{ infoPerson.person.location.name }}</small></h6>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-secondary btn-block" role="button" (click)="seeNeeds()">
+            See Needs
+        </button>
+        <button class="btn btn-secondary btn-block" role="button" (click)="seeProposals()">
+            My proposals
+        </button>
+    </div>
+</div>
+
+
+<div class="card mb-3" *ngIf="showNeeds && !showProposals">
+    <div class="card-header">Needs</div>
+    <div class="card-body text-primary">
+        <ng-template #sinDatos>
+            <div class="alert alert-info">
+                There are no records in the database
+            </div>
+        </ng-template>
+
+        <table class="table" *ngIf="needs?.length > 0; else sinDatos">
+            <thead>
+                <tr>
+                    <th>Conmpany</th>
+                    <th>Need</th>
+                    <th>Proposal</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let need of needs | paginate:page_size:page_number">
+                    <td>
+                        Torre Labs
+                    </td>
+                    <td>
+                        {{ need.description}}
+                    </td>
+
+                    <td>
+                        <!-- [routerLink]="['/person/personform', person.idPerson]" -->
+                        <button type="button" name="newProposal" class="btn btn-primary btn-sm" (click)="openNewModal(content, need)"> <i class="far fa-hand-point-up"></i> </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="needs.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+
+    <div class="text-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status" *ngIf="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mb-3" *ngIf="!showNeeds && showProposals">
+    <div class="card-header">My Proposals</div>
+    <div class="card-body text-primary">
+        <ng-template #sinDatos>
+            <div class="alert alert-info">
+                There are no records in the database
+            </div>
+        </ng-template>
+
+        <table class="table" *ngIf="proposals?.length > 0; else sinDatos">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Proposal</th>
+                    <th>Create At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of proposals | paginate:page_size:page_number">
+                    <td>
+                        Torre Labs
+                    </td>
+                    <td>
+                        {{ p.description}}
+                    </td>
+                    <td>
+                        {{ p.createDate | date }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="proposals.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+
+    <div class="text-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status" *ngIf="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{titulo}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(closeModal())">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #formulario="ngForm">
+            <div class="form-group row">
+                <label for="DescriptionTxt" class="col-form-label col-sm-5">Description:</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="DescriptionTxt" rows="3" [(ngModel)]="proposal.Description" name="Description" required></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-block" role="button" (click)="modal.close(create())" *ngIf="!proposal.Id; else elseBlock" [disabled]="!formulario.form.valid">Crear</button>
+        <ng-template #elseBlock>
+            <button class="btn btn-primary btn-block" role="button" (click)="modal.close(update())" [disabled]="!formulario.form.valid">Editar</button>
+        </ng-template>
+    </div>
+</ng-template>

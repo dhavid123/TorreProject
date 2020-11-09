@@ -1,0 +1,17 @@
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(../../../assets/img/Deal.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+.EncabezadoBanner {
+    background-image: url(/src/assets/img/Buttons/Banner.jpg);
+    height: 100px;
+    width: 889px;
+    margin-top: 3%;
+    margin-left: 5%;
+}

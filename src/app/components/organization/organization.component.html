@@ -1,0 +1,54 @@
+<h1 class="animated fadeIn">Welcome {{infoOrg.organizations[0].name}}</h1>
+<hr />
+
+
+<div class="animated fadeIn card text-white bg-dark mb-3">
+    <div class="card-header">
+        Reason
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{infoOrg.details[0].content}}</p>
+        <button class="btn btn-secondary btn-block" (click)="openNewModal(content)">New Need</button>
+    </div>
+</div>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{titulo}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(closeModal())">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #formulario="ngForm">
+            <div class="form-group row">
+                <label for="DescriptionTxt" class="col-form-label col-sm-5">Description:</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="DescriptionTxt" rows="3" [(ngModel)]="need.Description" name="Description" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="location" class="col-form-label col-sm-5">Location:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="need.Location" name="location" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="nroProposals" class="col-form-label col-sm-5">Max Proposals:</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" [(ngModel)]="need.MaxProposals" name="nroProposals" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-block" role="button" (click)="modal.close(create())" *ngIf="!need.Id; else elseBlock" [disabled]="!formulario.form.valid">Crear</button>
+        <ng-template #elseBlock>
+            <button class="btn btn-primary btn-block" role="button" (click)="modal.close(update())" [disabled]="!formulario.form.valid">Editar</button>
+        </ng-template>
+    </div>
+</ng-template>
