@@ -7,11 +7,11 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\developer\angular\appTorreProject\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"8jWO");
-__webpack_require__(/*! C:\developer\angular\appTorreProject\src\styles.css */"OmL/");
-__webpack_require__(/*! C:\developer\angular\appTorreProject\node_modules\bootstrap\dist\css\bootstrap.min.css */"q4sD");
-__webpack_require__(/*! C:\developer\angular\appTorreProject\node_modules\ngx-bootstrap\datepicker\bs-datepicker.css */"xlFp");
-module.exports = __webpack_require__(/*! C:\developer\angular\appTorreProject\node_modules\@fortawesome\fontawesome-free\css\all.css */"FfUf");
+__webpack_require__(/*! C:\Developer\Angular\AppTorreProject\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"8jWO");
+__webpack_require__(/*! C:\Developer\Angular\AppTorreProject\src\styles.css */"OmL/");
+__webpack_require__(/*! C:\Developer\Angular\AppTorreProject\node_modules\bootstrap\dist\css\bootstrap.min.css */"q4sD");
+__webpack_require__(/*! C:\Developer\Angular\AppTorreProject\node_modules\ngx-bootstrap\datepicker\bs-datepicker.css */"xlFp");
+module.exports = __webpack_require__(/*! C:\Developer\Angular\AppTorreProject\node_modules\@fortawesome\fontawesome-free\css\all.css */"FfUf");
 
 
 /***/ }),
